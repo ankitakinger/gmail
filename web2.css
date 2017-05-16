@@ -398,10 +398,17 @@ body {
 	border:none;
 	color: grey;
 	width:85%;
-	content: unset;
 	outline: none;
 }
 
 #right-icons{
 	float:right;
+}
+
+#back-btn{
+	display:none;
+}
+
+#size{
+	cursor: default;
 }

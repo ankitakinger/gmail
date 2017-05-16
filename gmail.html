@@ -53,23 +53,41 @@
 				<li>Select messages to see more actions</li>
 			</ul>
 		</div>
+		<i class="material-icons" id="del" style="margin-left=20px; margin-top:12px; font-size: 25px; cursor: pointer;">delete</i>
+		<div class="checkbox-btn" style="margin-left:20px" id="back-btn">Back</div>
 	</div>
 	<div class="right-div">
-		<b style="margin-top:15px;display: inline-block;">1-50 of 424</b>
-		<div class="checkbox-btn" style="width:30px;margin-right:0px;margin-left:0px;"> <
-		</div><div class="checkbox-btn" style="width:30px;margin-left:0px;"> >
-	</div>
-	<div class="checkbox-btn" style="margin-right:0px;width:45px;margin-left:20px;">
+		<b style="margin-top:15px;display: inline-block;" id="noofmails">
+		</b><span id="size">
+			<i class="fa fa-caret-down i-toggle">
+			</i>
+			<ul class="ul-toggle">
+				<li data-li="2">2</li>
+				<li data-li="4">4</li>
+				<li data-li="5">5</li>
+				<li data-li="7">7</li>
+				<li data-li="10">10</li>
+				<li data-li="12">12</li>
+				<li data-li="15">15</li>
+				<li data-li="17">17</li>
+				<li data-li="20">20</li>
+			</ul>
+		</span>
+		<div class="checkbox-btn" style="width:30px;margin-right:0px;margin-left:0px;" id="less-than"> <
+		</div><div class="checkbox-btn" style="width:30px;margin-left:0px;" id="greater-than"> >
+		</div>
+		<div class="checkbox-btn" style="width:50px;margin-left:0px;" id="goto-prompt">Goto</div>
+		<div class="checkbox-btn" style="margin-right:0px;width:45px;margin-left:20px;">
 		<i class="material-icons" style="font-size:20px;">keyboard</i>
-	</div><div class="checkbox-btn" style="width:20px;margin-left:0px;">
-	<i class="fa fa-caret-down i-toggle">
-	</i>
-	<ul class="ul-toggle">
-		<li>English</li>
-		<li>English Dvorak</li>
-		<li>English</li>
-		<li>Input Tools Settings</li>
-	</ul>
+		</div><div class="checkbox-btn" style="width:20px;margin-left:0px;">
+		<i class="fa fa-caret-down i-toggle">
+		</i>
+		<ul class="ul-toggle">
+			<li>English</li>
+			<li>English Dvorak</li>
+			<li>English</li>
+			<li>Input Tools Settings</li>
+		</ul>
 </div>
 <div class="checkbox-btn" style="margin-right:20px; margin-left:20px;">
 	<i class="material-icons" style="font-size:20px; margin-left:5px;">settings</i>
@@ -167,12 +185,14 @@
 <ul id="all-mails">
 	
 </ul>
+<div id="bottom-line">
 	<span style="font-size:12px;margin-right: 350px;">1.79 GB (11%) of 15 GB used</span>
 	<span style="font-size:12px;"><u>Terms</u>-<u>Privacy</u></span>
 	<span style="font-size:12px;float:right;">Last account-activity: 13 minutes ago</span>
 	<div>
 	<span style="font-size:12px;"><u>Manage</u></span>
 	<span style="font-size:12px;float:right;"><u>Details</u></span>
+</div>
 </div>
 </div>
 
