@@ -60,12 +60,27 @@ $(document).ready(function(){
 		{"id":"t4","from":"dp.operations","subject":"Acknowledgement Mail","mail":"Hello","time":"Apr 13"},
 		{"id":"t5","from":"dp.operations","subject":"Acknowledgement Mail","mail":"Excuse Me","time":"Apr 13"},
 		{"id":"t6","from":"dp.operations","subject":"Acknowledgement Mail","mail":"Hello","time":"Apr 11"}];
+	//index of first mail on the pg
 	var m=0;
 	var size = 5;
+	//index of last mail on the pg + 1
+	var k;
 	var noofpages = 0;
 	var page = 1;
 	var tempactive = "inbox";
 	var active = "inbox";
+	if(localStorage.getItem('array1')==null){
+		localStorage.setItem("array1",JSON.stringify(array1));
+	}
+	if(localStorage.getItem('array3')==null){
+		localStorage.setItem("array3",JSON.stringify(array3));
+	}
+	if(localStorage.getItem('array4')==null){
+		localStorage.setItem("array4",JSON.stringify(array4));
+	}
+	array1 = JSON.parse(localStorage.array1);
+	array3 = JSON.parse(localStorage.array3);
+	array4 = JSON.parse(localStorage.array4);
 	toggleActive();
 
 	function toggleActive(){
@@ -102,7 +117,6 @@ $(document).ready(function(){
 	function setActive(contents){
 
 		var i = 0;
-		var k;
 		
 		noofpages = contents.length/size;
 		document.getElementById("all-mails").innerHTML="";
@@ -143,7 +157,7 @@ $(document).ready(function(){
 		for(i+=m;i<k;i++)
 		{
 
-			maillist="<li class='li-mail' data-span='"+m+"'><span class='mailicons'><input type='checkbox' class='star-icon' data-myid='"+contents[i].id+"'><i class='fa fa-star-o star-icon'></i>"+
+			maillist="<li class='li-mail' data-span='"+i+"'><span class='mailicons'><input type='checkbox' class='star-icon' data-myid='"+contents[i].id+"'><i class='fa fa-star-o star-icon'></i>"+
 			"<i class='material-icons star-icon' id='lbl'>label_outline</i></span><span><span class='from'>"+contents[i].from+"</span><span class='subject'>"+
 			contents[i].subject+" - "+contents[i].mail+"</span><span class='time'>"+contents[i].time+"</span></span></input></li>";
 			document.getElementById("all-mails").innerHTML+=maillist;
@@ -152,12 +166,10 @@ $(document).ready(function(){
 		
 			$("[data-span]").click(function(){
 				var selMail = this.dataset.span;
-				//console.log("clicked");
 				$("#back-btn").css("display","inline-block");
 				document.getElementById("all-mails").innerHTML="";
 				$(".mail-types").css("display","none");
 				$("#bottom-line").css("display","none");
-				//console.log(selMail);
 				mailcontent="<div><b>"+contents[selMail].subject+"<hr></b>"+contents[selMail].from+"<hr>"+contents[selMail].mail;
 				document.getElementById("all-mails").innerHTML+=mailcontent;
 				
@@ -165,12 +177,11 @@ $(document).ready(function(){
 
 			$(".mailicons").click(function(){
 				event.stopPropagation();
-			});
-		
+			});	
 	}
+	
 
 		$("#back-btn").click(function(){
-			//console.log("back clicked");
 			$("#back-btn").css("display","none");
 			$(".mail-types").css("display","inline-block");
 			$("#bottom-line").css("display","inline-block");
@@ -184,7 +195,7 @@ $(document).ready(function(){
 				}
 				m=((page-1)*size);
 				toggleActive();
-			});
+		});
 
 
 		$("#greater-than").click(function(){
@@ -228,6 +239,7 @@ $(document).ready(function(){
 	$(".i-toggle").click(function(){
 		$(this).next(".ul-toggle").slideToggle('fast');
 	});
+
 
 	$("#a").click(function(){
 		$(this).css("background-color","white");
@@ -274,6 +286,7 @@ $(document).ready(function(){
 		if($.trim(to)!=''){
 			array3.unshift({"from":"To:"+to,"subject":subject,"mail":content,"time":"Just Now"});
 			setTimeout(function(){alert("Message sent successfully!!");},0);
+			localStorage.setItem("array3",JSON.stringify(array3));
 		}
 	});
 
@@ -285,7 +298,8 @@ $(document).ready(function(){
 
 	var selarray=[];
 	function selectedCB(id){
-		for(var i=0;i<array1.length;i++)
+		var i = 0;
+		for(i+=m;i<k;i++)
 		{
 			if(array1[i].id==id)
 				selarray.unshift(array1[i]);
@@ -295,26 +309,27 @@ $(document).ready(function(){
 	$("#del").click(function(){
 		
 		var j=[];
-		var k=0;
-		
-		for(var i=0;i<array1.length;i++){
-				
-				if($("[data-myid]")[i].checked==true){
+		var z=0;
+		var i = 0;
+		for(i+=m;i<k;i++){
+				if($("[data-myid]")[i-m].checked==true){
 					selectedCB(array1[i].id);
-					j[k]=i;
-				 	k++;
+					j[z]=i;
+				 	z++;
 				}
 						
 		}
 
 		for(var i=0;i<selarray.length;i++){
 			array4.unshift(selarray[i]);
+			localStorage.setItem("array4",JSON.stringify(array4));
 		}
 
 		selarray=[];
 	
 		for(var i=0;i<j.length;i++){
 			array1.splice(j[i]-i,1);
+			localStorage.setItem("array1",JSON.stringify(array1));
 		}
 
 		j=[];
@@ -323,5 +338,5 @@ $(document).ready(function(){
 		toggleActive();
 
 		});
-	
+			
 });
