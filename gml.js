@@ -238,6 +238,14 @@ $(document).ready(function(){
 	
 	$(".i-toggle").click(function(){
 		$(this).next(".ul-toggle").slideToggle('fast');
+		$(".i-toggle").not(this).next(".ul-toggle").hide();
+		event.stopPropagation();
+	});
+
+	$('body').click(function(){
+		if($(".ul-toggle").show()){
+			$(".ul-toggle").hide();
+		}
 	});
 
 
